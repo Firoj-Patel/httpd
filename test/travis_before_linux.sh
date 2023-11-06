@@ -19,7 +19,8 @@ cat /etc/hosts
 sysctl net.ipv6.conf.all.disable_ipv6 || true
 if grep ip6-localhost /etc/hosts; then
     #sudo sed -i "/ip6-/d" /etc/hosts #This gives error /usr/bin/sed: cannot rename /etc/sedhqxOLK: Device or resource busy so use echo "$( cat /etc/hosts| sed 's/ip6-/d/')"  >  /etc/hosts it work same
-    echo "$( cat /etc/hosts| sed 's/ip6-/d/')"  >  /etc/hosts
+    echo "$( cat /etc/hosts| sed 's/ip6-/d/')" | sudo tee -a /etc/hosts > /dev/null
+    #echo "$( cat /etc/hosts| sed 's/ip6-/d/')"  >  /etc/hosts
     cat /etc/hosts
 fi
 
