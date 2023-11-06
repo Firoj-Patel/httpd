@@ -312,9 +312,7 @@ jobs:
       with:
         name: error_log ${{ matrix.node-version }}
         path: test/perl-framework/t/logs/error_log
-
-#target : [s390x]
-    steps:
+        
     - uses: actions/checkout@v3
     - uses: uraimo/run-on-arch-action@v2.5.0
     
