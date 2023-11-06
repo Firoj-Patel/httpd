@@ -16,6 +16,7 @@ cat /etc/hosts
 # that Apache::Test only configures the server to Listen on 0.0.0.0
 # (that is hard-coded), but then Apache::TestSerer::wait_till_is_up()
 # tries to connect via ::1, which fails/times out.
+sysctl net.ipv6.conf.all.disable_ipv6 || true
 if grep ip6-localhost /etc/hosts; then
     sudo sed -i "/ip6-/d" /etc/hosts
     cat /etc/hosts
