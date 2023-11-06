@@ -18,6 +18,7 @@ cat /etc/hosts
 # tries to connect via ::1, which fails/times out.
 sysctl net.ipv6.conf.all.disable_ipv6 || true
 if grep ip6-localhost /etc/hosts; then
+    sleep 1m
     sudo sed -i "/ip6-/d" /etc/hosts
     cat /etc/hosts
 fi
