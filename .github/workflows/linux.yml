@@ -313,3 +313,28 @@ jobs:
         name: error_log ${{ matrix.node-version }}
         path: test/perl-framework/t/logs/error_log
 
+#target : [s390x]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: uraimo/run-on-arch-action@v2.5.0
+    
+      env:
+        NOTEST_CFLAGS: ${{ matrix.notest-cflags }}
+        CONFIG: ${{ matrix.config }}    
+    
+      name: Build and Test
+      with:
+          arch: s390x
+          distro: ubuntu22.04
+          githubToken: ${{ github.token }}
+          install: |
+            apt-get update     
+
+          run: |            
+            apt-get install -y make python3-pytest nghttp2-client git cpanminus libtool-bin libapr1-dev libaprutil1-dev \
+            liblua5.3-dev libbrotli-dev libcurl4-openssl-dev libnghttp2-dev libjansson-dev \
+            libpcre2-dev gdb perl-doc ${{ matrix.pkgs }}                  
+            #echo yes | :: restore-keys cache-apru,cache-cpan
+            echo yes | cpan install Apache::Test5005compat -y
+            ./test/travis_before_linux.sh
+            ./test/travis_run_linux.sh
