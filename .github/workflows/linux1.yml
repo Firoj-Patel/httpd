@@ -332,7 +332,7 @@ jobs:
             apt-get install -y sudo make python3-pytest nghttp2-client git cpanminus libtool-bin libapr1-dev libaprutil1-dev \
             liblua5.3-dev libbrotli-dev libcurl4-openssl-dev libnghttp2-dev libjansson-dev libio-socket-ssl-perl libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev zlib1g-dev \
             libpcre2-dev gdb perl-doc ${{ matrix.pkgs }}                  
-            echo yes | :: restore-keys cache-apru,cache-cpan
+            #echo yes | :: restore-keys cache-apru,cache-cpan
             echo yes | cpan install Apache::Test5005compat -y
             ./test/travis_before_linux.sh
             ./test/travis_run_linux.sh
