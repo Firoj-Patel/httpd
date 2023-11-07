@@ -321,6 +321,19 @@ jobs:
         CONFIG: ${{ matrix.config }}    
     
       name: Build and Test
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-apru
+      with:
+        path: ~/root
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('/home/runner/root/.key-*') }}
+    - name: Cache CPAN modules
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-cpan
+      with:
+        path: ~/perl5
+        key: ${{ runner.os }}-cpan-${{ env.cache-name }}-${{ hashFiles('/home/runner/perl5/.key') }}
       with:
           arch: s390x
           distro: ubuntu22.04
