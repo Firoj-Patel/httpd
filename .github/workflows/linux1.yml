@@ -265,7 +265,7 @@ jobs:
           #     APU_VERSION=1.6.3
           # APU_CONFIG="--with-crypto --with-ldap"
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     env:
       NOTEST_CFLAGS: ${{ matrix.notest-cflags }}
       CONFIG: ${{ matrix.config }}
@@ -298,7 +298,7 @@ jobs:
         key: ${{ runner.os }}-cpan-${{ env.cache-name }}-${{ hashFiles('/home/runner/perl5/.key') }}
     - name: Configure environment
       run: ./test/travis_before_linux.sh
-      timeout-minutes: 15
+      timeout-minutes: 25
     - uses: actions/upload-artifact@v3
       if: failure()
       with:
